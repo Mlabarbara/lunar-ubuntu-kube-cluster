@@ -16,7 +16,7 @@ provider "proxmox" {
 resource "proxmox_vm_qemu" "kube_server" {
   target_node = "pve"
   name = "kube-server"
-  clone = "ubuntu-ci-template"
+  clone = "ubuntu-cloud-0"
   vmid = 2020
   
   agent = 1
@@ -46,7 +46,7 @@ resource "proxmox_vm_qemu" "kube_server" {
 resource "proxmox_vm_qemu" "kube_node1" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-ci-template"
+  clone = "ubuntu-cloud-1"
   name = "kube-node-1"
   vmid = "211"
 
@@ -78,7 +78,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
 resource "proxmox_vm_qemu" "kube_node2" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-ci-template"
+  clone = "ubuntu-cloud-2"
   name = "kube-node-2"
   vmid = "222"
 
