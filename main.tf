@@ -48,7 +48,7 @@ resource "proxmox_vm_qemu" "kube_node" {
   clone = "ubuntu-ci-template"
   name = "kube-node-${count.index + 1}"
 
-  agent = 1
+  agent = 2
   os_type = "cloud-init"
   cores = 2
   memory = 2048
