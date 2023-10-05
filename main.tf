@@ -80,7 +80,7 @@ resource "proxmox_vm_qemu" "kube_node2" {
   target_node = "pve"
   clone = "ubuntu-ci-template"
   name = "kube-node-2"
-  vmid = "211"
+  vmid = "222"
 
 
   agent = 1
