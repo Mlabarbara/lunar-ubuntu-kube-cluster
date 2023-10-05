@@ -43,12 +43,12 @@ resource "proxmox_vm_qemu" "kube_server" {
   sshkeys = var.sshkeys
 }
 resource "proxmox_vm_qemu" "kube_node" {
-  count = 1
+  count = 2
   target_node = "pve"
   clone = "ubuntu-ci-template"
   name = "kube-node-${count.index + 1}"
 
-  agent = 2
+  agent = 1
   os_type = "cloud-init"
   cores = 2
   memory = 2048
