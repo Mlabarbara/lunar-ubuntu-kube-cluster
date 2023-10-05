@@ -1,0 +1,4 @@
+pm_api_url = "https://192.168.12.1:8006/api2/json"
+pm_api_token_id = "root@pve!root-token"
+pm_api_token_secret = "e643b39f-2700-4dae-ab54-c87b3e160b02"
+sshkeys = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCLsmKKxk0kYiRT0bOi+sn1Skf7MX+ipPt0hTtT6+sl36DRL5C+d9EKQ9eeDDFwe4i2H35Bjhf6fxCuJYA9vZnEXZ3Z1gkBY1hTbksYeyTF0jS50wdCxYCVCjb0LE+EW+HjssMi5Ku2zxfiaib93yLKA1AoWfChKhJ/1sQt9smrWm2Tv1cMQgeOFtA7HXkZEnHnd2c1AVaaR6w4jq9hNAp5WMR/ATwnoYFKURv6Xx/GtZPKLuG2meyIgSySKXSBmDFg+8qet525nv/zlQZBS6qYXhfWQ9kRgYM9gE2JhQfvOwqgnhoNIFDTdSCfakE7fHIxPIqtsu+hiqERsMQvXyub root@pve"
