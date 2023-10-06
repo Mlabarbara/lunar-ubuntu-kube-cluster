@@ -61,7 +61,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
   balloon = 0
 
   disk {
-    storage = "ssd1"
+    storage = "local-lvm"
     slot = 0
     size = "10G"
     type = "scsi"
@@ -93,7 +93,7 @@ resource "proxmox_vm_qemu" "kube_node2" {
   balloon = 0
 
   disk {
-    storage = "ssd2"
+    storage = "local-lvm"
     slot = 0
     size = "10G"
     type = "scsi"
