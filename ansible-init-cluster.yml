@@ -32,7 +32,7 @@
     file: 
       path: "{{ home_dir }}/.kube"
       state: directory
-      user: 1000
+      owner: 1000
       group: 1000
 
   - name: Configure .kube/config files in the users home 
