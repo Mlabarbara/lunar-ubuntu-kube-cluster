@@ -52,7 +52,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
 
 
   agent = 1
-  os_type = "ssd1"
+  os_type = "cloud-init"
   cores = 2 
   memory = 4096
   sockets = 1
@@ -61,7 +61,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
   balloon = 1
 
   disk {
-    storage = "ssd2"
+    storage = "ssd1"
     slot = 0
     size = "10G"
     type = "scsi"
