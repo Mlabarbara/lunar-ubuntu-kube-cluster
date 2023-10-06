@@ -26,7 +26,7 @@ resource "proxmox_vm_qemu" "kube_server" {
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
     storage = "local-lvm"
@@ -58,7 +58,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
     storage = "ssd1"
@@ -90,7 +90,7 @@ resource "proxmox_vm_qemu" "kube_node2" {
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
     storage = "ssd2"
