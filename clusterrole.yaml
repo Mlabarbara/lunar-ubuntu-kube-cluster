@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-- kind: ServiceAcccount
+- kind: ServiceAccount
   name: admin-user
   namespace: kubernetes-dashboard
