@@ -61,6 +61,6 @@
     
   - name: appliying dashboard
     become: no
-    comomand: kubectl apply -f "{{ home_dir }}/dashboard.yaml"
+    command: kubectl apply -f "{{ home_dir }}/dashboard.yaml"
     
 
