@@ -48,7 +48,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
   target_node = "pve"
   clone = "ubuntu-cloud-1"
   name = "kube-node-1-${count.index + 1}"
-  vmid = "211"
+  vmid = "21${count.index + 1}"
 
 
   agent = 1
@@ -80,7 +80,7 @@ resource "proxmox_vm_qemu" "kube_node2" {
   target_node = "pve"
   clone = "ubuntu-cloud-2"
   name = "kube-node-2-${count.index + 1}"
-  vmid = "222"
+  vmid = "22${count.index + 1}"
 
 
   agent = 1
