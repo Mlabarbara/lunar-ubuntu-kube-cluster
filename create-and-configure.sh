@@ -18,7 +18,7 @@ then
 else
   echo "Terraform failed to create VMs"
   echo "lol jk i have no clue what failed, figure your shit out"
-  echo "really, no error checking or handling...
+  echo "really, no error checking or handling..."
   exit 1
 fi 
 
