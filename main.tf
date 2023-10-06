@@ -44,9 +44,9 @@ resource "proxmox_vm_qemu" "kube_server" {
   sshkeys = var.sshkeys
 }
 resource "proxmox_vm_qemu" "kube_node1" {
-  count = 2
+  count = 3
   target_node = "pve"
-  clone = "ubuntu-cloud-0"
+  clone = "ubuntu-cloud-1"
   name = "kube-node-1-${count.index + 1}"
   vmid = "21${count.index + 1}"
 
@@ -76,9 +76,9 @@ resource "proxmox_vm_qemu" "kube_node1" {
   sshkeys = var.sshkeys
 }
 resource "proxmox_vm_qemu" "kube_node2" {
-  count = 2
+  count = 3
   target_node = "pve"
-  clone = "ubuntu-cloud-0"
+  clone = "ubuntu-cloud-2"
   name = "kube-node-2-${count.index + 1}"
   vmid = "22${count.index + 1}"
 

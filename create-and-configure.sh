@@ -3,7 +3,7 @@
 # I have an alias for 'terraform apply -auto-approve'
 # yes I understand the irony 
 #terraform init
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
 # check if completed without errors
 
