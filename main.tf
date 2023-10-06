@@ -53,7 +53,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
 
   agent = 1
   os_type = "ssd1"
-  cores = 4
+  cores = 2 
   memory = 4096
   sockets = 1
   scsihw = "virtio-scsi-single"
@@ -85,7 +85,7 @@ resource "proxmox_vm_qemu" "kube_node2" {
 
   agent = 1
   os_type = "cloud-init"
-  cores = 4
+  cores = 2
   memory = 4096
   sockets = 1
   scsihw = "virtio-scsi-single"
