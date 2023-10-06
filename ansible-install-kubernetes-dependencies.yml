@@ -24,7 +24,7 @@
 
   - name: Adding apt respository for stabel version 
     apt_repository:
-      repo: deb [arch=amb64] https://download.docker.com/linux/ubuntu xenial stable
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
       state: present 
 
   - name: installing docker and its dependencies
