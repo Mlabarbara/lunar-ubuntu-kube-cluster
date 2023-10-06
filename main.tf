@@ -26,7 +26,7 @@ resource "proxmox_vm_qemu" "kube_server" {
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
     storage = "local-lvm"
@@ -44,10 +44,10 @@ resource "proxmox_vm_qemu" "kube_server" {
   sshkeys = var.sshkeys
 }
 resource "proxmox_vm_qemu" "kube_node1" {
-  count = 1
+  count = 2
   target_node = "pve"
   clone = "ubuntu-cloud-1"
-  name = "kube-node-1"
+  name = "kube-node-1-${count.index + 1}"
   vmid = "211"
 
 
@@ -72,14 +72,14 @@ resource "proxmox_vm_qemu" "kube_node1" {
     model = "virtio"
     bridge = "vmbr0"
   }
-  ipconfig0 = "ip=192.168.12.111/16,gw=192.168.10.1"
+  ipconfig0 = "ip=192.168.12.11${count.index + 1}/16,gw=192.168.10.1"
   sshkeys = var.sshkeys
 }
 resource "proxmox_vm_qemu" "kube_node2" {
-  count = 1
+  count = 2
   target_node = "pve"
   clone = "ubuntu-cloud-2"
-  name = "kube-node-2"
+  name = "kube-node-2-${count.index + 1}"
   vmid = "222"
 
 
@@ -104,6 +104,6 @@ resource "proxmox_vm_qemu" "kube_node2" {
     model = "virtio"
     bridge = "vmbr0"
   }
-  ipconfig0 = "ip=192.168.12.222/16,gw=192.168.10.1"
+  ipconfig0 = "ip=192.168.12.22${count.index + 1}/16,gw=192.168.10.1"
   sshkeys = var.sshkeys
 }
