@@ -45,7 +45,7 @@
 
   - name: restart the kubelet for the configuration to take place
     service:
-      name: kublet 
+      name: kubelet 
       state: restarted
 
   - name: get calico networking 
@@ -53,7 +53,11 @@
       url: https://projectcalico.docs.tigera.io/manifests/calico.yaml
       dest: "{{ home_dir }}/calico.yaml"
 
-  - name: apply calico networking
+  - name: apply calico netowrking 
+    become: no
+    command: kubectl apply -f "{{ home_dir }}/calico.yaml"
+
+  - name: get dashboard
     become: no
     get_url: 
       url: https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio.deploy/recommended.yaml
