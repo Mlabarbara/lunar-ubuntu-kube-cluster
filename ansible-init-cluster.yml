@@ -1,0 +1,66 @@
+- hosts: kube_server
+  become: true
+  remote_user: ubuntu
+
+  vars_files:
+    - ansible-vars.yaml
+
+  tasks:
+  - name: Set docker to use systemd cgroups driver
+    copy: 
+      dest: "/etc/docker/daemon.json"
+      content: | 
+        {
+          "exec-opts": ["native.cgroupdriver=systemd"]
+        }
+  - name: restart docker
+    service:
+      name: docker
+      state: restarted
+
+  - name: initialize the kubernetes cluster
+    command: "kubeadm init --apiserver-advertise-address=192.168.12.20 --pod-network-cidr {{ pod_cidr}}"
+    args:
+      creates: /etc/kuberbetes/admin.conf # skit this task if the file already exists
+    register: kube_init
+
+  - name: show kube init info
+    debug:
+      var: kube_init
+    
+  - name: create .kube directory in the user home 
+    file: 
+      path: "{{ home_dir }}/.kube"
+      state: directory
+      user: 1000
+      group: 1000
+
+  - name: Configure .kube/config files in the users home 
+    copy: 
+      src: /etc/kubernetes/admin.conf
+      dest: "{{ home_dir }}/.kube/config"
+      remote_src: yes
+      owner: 1000
+      group: 1000
+
+  - name: restart the kubelet for the configuration to take place
+    service:
+      name: kublet 
+      state: restarted
+
+  - name: get calico networking 
+    get_url: 
+      url: https://projectcalico.docs.tigera.io/manifests/calico.yaml
+      dest: "{{ home_dir }}/calico.yaml"
+
+  - name: apply calico networking
+    become: no
+    get_url: 
+      url: https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio.deploy/recommended.yaml
+      dest: "{{ home_dir }}/dashboard.yaml"
+    
+  - name: appliying dashboard
+    become: no
+    comomand: kubectl apply -f "{{ home_dir }}/dashboard.yaml"
+    
+
