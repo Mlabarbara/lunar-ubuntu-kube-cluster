@@ -1,0 +1,104 @@
+-- 
+- hosts: all
+become: true
+remote_user: ubuntu
+tasks: 
+- name: install packages that allow apl to be used over https
+  apt:
+    name: "{{packages}}"
+    state: present
+    update_cache: yes
+ vars:
+  packages: 
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - vim
+  - gnupg-agent 
+  - software-properties-common
+
+- name: add an apt signing key for docker
+  apt_key: 
+    url: https://download.docker/linux/ubuntu/gpg 
+    state: present
+
+- name: Adding apt respository for stabel version 
+  apt_repository:
+    repo: deb [arch=amb64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present 
+
+- name: installing docker and its dependencies
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars: 
+    packages: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: verify docker installed, enabled, and started
+  service: 
+    name: docker
+    state: started
+    enabled: yes
+
+- name: remove swapfile from /etc/fstab
+  mount: 
+    name: "{{ item }}"
+    fstype: swap
+    state: absent
+  with_items:
+    - swap
+    - none 
+
+- name: disabling swap
+  command: swapoff -a 
+  when: ansible_swaptotal_mb >=0
+
+- name: add an apt repository signing key for kubernetes 
+  apt_key: 
+    url: https://packages.cloud.google.com/apt/doc/aot-key.gpg
+    state: present
+- name: add apt repository for kubernetes
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: kubernetes.list 
+
+- name: install kubernetes binaries
+  apt:
+    name: "{{packages}}"
+    state: present
+    update_cache: yes
+  vars:
+    packages: 
+      - kubelet=1.23.6-00
+      - kubeadm-1.23.6-00
+      - kubectl=1.23.6-00
+  
+- name: hold kubernetes binariay versions to prevent from updating 
+  dpkg_selections:
+    name: "{{itme}}"
+    selection: hold
+  loop:
+    - kubectl
+    - kubeadm
+    - kubelet 
+
+- name: restart kubelets 
+  service:  
+    name: kubelet
+    daemon_reload: yes
+    state: restarted
+
+- name: add ubuntu user to docker 
+  user:
+    name: ubuntu
+    group: docker
+
+- name: reboot to apply swappoff
+  reboot:
+    reboot_timeout: 180 # allow for the reboot to take place
+  
