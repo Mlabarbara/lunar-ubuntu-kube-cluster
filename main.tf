@@ -14,7 +14,7 @@ provider "proxmox" {
 }
 
 resource "proxmox_vm_qemu" "kube_server" {
-  count = 3
+  count = 1
   target_node = "pve"
   name = "kube-server"
   clone = "ubuntu-cloud-0"
