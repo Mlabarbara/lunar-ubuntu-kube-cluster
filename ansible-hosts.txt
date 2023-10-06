@@ -1,0 +1,14 @@
+# this is just a file that holds each of the IP address en the cluster 
+# that ansible will work with 
+
+[all]
+192.168.12.20
+192.168.12.111
+192.168.12.222
+
+[kube_server]
+192.168.12.20
+
+[kube_agents]
+192.168.12.111
+192.168.12.222
