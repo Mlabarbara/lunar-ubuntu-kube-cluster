@@ -1,0 +1,9 @@
+# specifies the CIDR for the kubes to speak on
+
+pod_cidr: "172.12.12.12/22"
+
+# specifies where to find the join command
+join_command_location: "join_command.out"
+
+# set the home directory 
+home_dir: '/home/ubuntu'
