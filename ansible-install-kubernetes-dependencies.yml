@@ -13,7 +13,6 @@
       - apt-transport-https
       - ca-certificates
       - curl
-      - vim
       - gnupg-agent 
       - software-properties-common
 
@@ -24,7 +23,7 @@
 
   - name: Adding apt respository for stabel version 
     apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu lunar stable
       state: present 
 
   - name: installing docker and its dependencies
@@ -63,7 +62,7 @@
       state: present
   - name: add apt repository for kubernetes
     apt_repository:
-      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      repo: deb https://apt.kubernetes.io/ kubernetes-lunar main
       state: present
       filename: kubernetes.list 
 
