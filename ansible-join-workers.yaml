@@ -2,7 +2,7 @@
   become: true
   remote_user: ubuntu
 
-  var_files:
+  vars_files:
     - ansible-vars.yaml
   
   tasks:

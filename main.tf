@@ -46,22 +46,22 @@ resource "proxmox_vm_qemu" "kube_server" {
 resource "proxmox_vm_qemu" "kube_node1" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-cloud-1"
+  clone = "ubuntu-cloud-0"
   name = "kube-node-1"
   vmid = "211"
 
 
   agent = 1
-  os_type = "cloud-init"
+  os_type = "ssd1"
   cores = 2
   memory = 2048
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
-    storage = "ssd1"
+    storage = "local-lvm"
     slot = 0
     size = "5G"
     type = "scsi"
@@ -78,7 +78,7 @@ resource "proxmox_vm_qemu" "kube_node1" {
 resource "proxmox_vm_qemu" "kube_node2" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-cloud-2"
+  clone = "ubuntu-cloud-1"
   name = "kube-node-2"
   vmid = "222"
 
@@ -90,10 +90,10 @@ resource "proxmox_vm_qemu" "kube_node2" {
   sockets = 1
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
-  balloon = 1
+  balloon = 0
 
   disk {
-    storage = "ssd2"
+    storage = "ssd1"
     slot = 0
     size = "5G"
     type = "scsi"
