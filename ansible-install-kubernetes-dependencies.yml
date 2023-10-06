@@ -59,7 +59,7 @@
 
   - name: add an apt repository signing key for kubernetes 
     apt_key: 
-      url: https://packages.cloud.google.com/apt/doc/aot-key.gpg
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
       state: present
   - name: add apt repository for kubernetes
     apt_repository:
@@ -75,12 +75,12 @@
     vars:
       packages: 
         - kubelet=1.23.6-00
-        - kubeadm-1.23.6-00
+        - kubeadm=1.23.6-00
         - kubectl=1.23.6-00
     
   - name: hold kubernetes binariay versions to prevent from updating 
     dpkg_selections:
-      name: "{{itme}}"
+      name: "{{item}}"
       selection: hold
     loop:
       - kubectl
