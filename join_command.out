@@ -1,0 +1,1 @@
+kubeadm join 192.168.12.20:6443 --token hkgcuo.zaoegjcmmb6ug1s3 --discovery-token-ca-cert-hash sha256:d66940b0a22430322008563faccb87dba5ed1b8bb753f6230f60ece3b9bfa364
