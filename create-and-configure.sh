@@ -2,8 +2,8 @@
 
 # I have an alias for 'terraform apply -auto-approve'
 # yes I understand the irony 
-terraform init
-terraform apply -auto-approve
+#terraform init
+#terraform apply -auto-approve
 
 # check if completed without errors
 
@@ -12,7 +12,7 @@ if [ $? -eq 0 ]
 then 
   playbooks=("ansible-install-kubernetes-dependencies.yml" "ansible-init-cluster.yml" "ansible-get-join-command.yml" "ansible-join-workers.yaml")
   # init loop
-  for playbooks in "${playbooks[@]}"
+  for playbook in "${playbooks[@]}"
   do
     ansible-playbook -i ansible-hosts.txt $playbook
   done
