@@ -14,6 +14,7 @@ provider "proxmox" {
 }
 
 resource "proxmox_vm_qemu" "kube_server" {
+  count = 3
   target_node = "pve"
   name = "kube-server"
   clone = "ubuntu-cloud-0"
@@ -43,10 +44,11 @@ resource "proxmox_vm_qemu" "kube_server" {
   ipconfig0 = "ip=192.168.12.20/16,gw=192.168.10.1"
   sshkeys = var.sshkeys
 }
+/*
 resource "proxmox_vm_qemu" "kube_node1" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-cloud-1"
+  clone = "ubuntu-cloud-0"
   name = "kube-node-1-${count.index + 1}"
   vmid = "21${count.index + 1}"
 
@@ -75,10 +77,11 @@ resource "proxmox_vm_qemu" "kube_node1" {
   ipconfig0 = "ip=192.168.12.11${count.index + 1}/16,gw=192.168.10.1"
   sshkeys = var.sshkeys
 }
+
 resource "proxmox_vm_qemu" "kube_node2" {
   count = 1
   target_node = "pve"
-  clone = "ubuntu-cloud-2"
+  clone = "ubuntu-cloud-0"
   name = "kube-node-2-${count.index + 1}"
   vmid = "22${count.index + 1}"
 
@@ -107,3 +110,4 @@ resource "proxmox_vm_qemu" "kube_node2" {
   ipconfig0 = "ip=192.168.12.22${count.index + 1}/16,gw=192.168.10.1"
   sshkeys = var.sshkeys
 }
+*/
