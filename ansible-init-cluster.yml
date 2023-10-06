@@ -18,11 +18,11 @@
       name: docker
       state: restarted
 
-  - name: initialize the kubernetes cluster
-    command: "kubeadm init --apiserver-advertise-address=192.168.12.20 --pod-network-cidr {{ pod_cidr}}"
-    args:
-      creates: /etc/kuberbetes/admin.conf # skit this task if the file already exists
-    register: kube_init
+# - name: initialize the kubernetes cluster
+#    command: "kubeadm init --apiserver-advertise-address=192.168.12.20 --pod-network-cidr {{ pod_cidr}}"
+#    args:
+#      creates: /etc/kuberbetes/admin.conf # skit this task if the file already exists
+#    register: kube_init
 
   - name: show kube init info
     debug:
