@@ -2,7 +2,8 @@
 
 # I have an alias for 'terraform apply -auto-approve'
 # yes I understand the irony 
-terracreate 
+terraform init
+terraform apply -auto-approve
 
 # check if completed without errors
 
